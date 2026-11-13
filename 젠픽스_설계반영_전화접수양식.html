@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>젠픽스 설계 반영 접수 · 적용 공간 전달</title><style>*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR','Malgun Gothic','맑은 고딕',sans-serif;color:#222;background:#f6f6f4;line-height:1.6}
+.top{background:#363636;color:#fff;padding:14px 20px}.top .in{max-width:860px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-weight:900;font-size:22px;letter-spacing:1px;color:#d8b45e}.top .tel{font-size:14px;color:#ddd}.top .tel b{color:#fff}
+.wrap{max-width:860px;margin:0 auto;padding:26px 18px 60px}
+h1{font-size:24px;margin:6px 0 8px;line-height:1.4}h1 em{font-style:normal;color:#b8923a}
+.lead{background:#fff;border:1px solid #e3e3e3;border-radius:12px;padding:16px 18px;margin:12px 0 4px;font-size:15px}
+.lead ol{margin:8px 0 0;padding-left:20px}.lead li{margin:3px 0}
+#zfn{background:#fff8e3;border-bottom:1px solid #e6d19a;color:#6b5420;font-size:12.5px;line-height:1.6;padding:8px 14px;text-align:center}
+#zfn a{color:#8a1c2b;font-weight:700;cursor:pointer;text-decoration:underline}
+.send{background:#fffdf4;border:1px solid #e0cf98;border-radius:12px;padding:18px 18px 16px;margin-top:18px}
+.send .zg{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px}
+.send label.f{display:block;font-size:13px;font-weight:700;color:#444}
+.send label.f small{font-weight:500;color:#999}
+.send input[type=text],.send input[type=tel],.send input[type=email],.send input[type=date],.send select,.send textarea{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1.5px solid #d9c99b;border-radius:8px;background:#fff;margin-top:4px}
+.send textarea{min-height:76px;resize:vertical}
+.send .full{grid-column:1/-1}
+.send .hp{position:absolute;left:-9999px;opacity:0;height:0;width:0}
+.send .agree{margin-top:12px;font-size:13.5px;line-height:1.7;display:flex;gap:9px;align-items:flex-start}
+.send .agree input{width:20px;height:20px;margin-top:3px;flex:none}
+.send details{margin-top:10px;background:#fff;border:1px solid #e3e3e3;border-radius:8px;padding:10px 12px;font-size:13px;line-height:1.75;color:#444}
+.send details summary{cursor:pointer;font-weight:700;color:#6b5420}
+.send details table{border-collapse:collapse;width:100%;margin-top:8px}
+.send details th,.send details td{border:1px solid #e3e3e3;padding:6px 9px;text-align:left;vertical-align:top;font-size:12.5px}
+.send details th{background:#f6f3e8;white-space:nowrap}
+.send .go{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.send .go button{background:#8a1c2b;color:#fff;border:0;border-radius:9px;padding:13px 22px;font:inherit;font-size:15.5px;font-weight:800;cursor:pointer}
+.send .go button[disabled]{opacity:.55}
+.send .go span{font-size:13px;color:#666}
+.filebox input[type=file]{display:block;width:100%;margin-top:6px;font:inherit;font-size:14px;padding:10px;border:1.5px dashed #d9c99b;border-radius:8px;background:#fffdf6}
+.filebox .fh{display:block;margin-top:6px;color:#666;font-size:12.5px}
+.filebox ul{list-style:none;margin:6px 0 0;padding:0;font-size:13.5px}.filebox li{display:flex;gap:8px;align-items:center;margin:2px 0}.filebox li button{border:1px solid #ccc;background:#fff;border-radius:6px;font-size:12px;cursor:pointer}
+#zfmsg{margin-top:10px;font-size:14px;font-weight:700}#zfmsg.ok{color:#1a6b3a}#zfmsg.er{color:#a02020}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#363636;color:#fff;padding:10px 18px;border-radius:20px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s}#toast.on{opacity:1}
+.foot{margin-top:18px;font-size:13px;color:#666}
+@media(max-width:640px){.send .zg{grid-template-columns:1fr}h1{font-size:20px}}</style></head><body>
+<div class="top"><div class="in"><span class="logo">ZENFIX</span><span class="tel">설계 문의 <b>010-9878-0487</b> · zenfix1@naver.com</span></div></div>
+<div class="wrap">
+<h1>젠픽스로 보내기 · <em>적용 공간 전달</em></h1>
+<div class="lead"><b>현장 정보와 도면만 남겨 주세요.</b> 확인 후 공간별 적용 가능 여부와 추천 제품을 회신드립니다. 별도로 전화하지 않으셔도 됩니다.
+<ol><li>아래 현장 정보를 입력합니다. (* 표시는 필수)</li><li>도면(DWG·PDF)이 있으면 함께 첨부합니다. (합계 10MB 이하)</li><li>개인정보 동의 후 「젠픽스에 보내기」를 누릅니다.</li></ol></div>
+<form class="send" id="zfform" onsubmit="return false" autocomplete="on">
+<div class="zg">
+<label class="f">지역 *<select id="zf_region"><option value="">선택</option><option>서울</option><option>부산</option><option>대구</option><option>인천</option><option>광주</option><option>대전</option><option>울산</option><option>세종</option><option>경기</option><option>강원</option><option>충북</option><option>충남</option><option>전북</option><option>전남</option><option>경북</option><option>경남</option><option>제주</option></select></label>
+<label class="f">회사명 (설계사무소) *<input type="text" id="zf_office" name="organization" autocomplete="organization" placeholder="예) ○○건축사사무소"></label>
+<label class="f">성함 *<input type="text" id="zf_name" name="name" autocomplete="name" placeholder="홍길동"></label>
+<label class="f">직책<input type="text" id="zf_pos" name="title" autocomplete="organization-title" placeholder="예) 팀장, 실장, 소장"></label>
+<label class="f">연락처 *<input type="tel" id="zf_tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="010-0000-0000"></label>
+<label class="f">이메일<input type="email" id="zf_mail" name="email" autocomplete="email" inputmode="email" placeholder="name@example.com"></label>
+<label class="f full">현장명 *<input type="text" id="zf_proj" placeholder="예) ○○시 복합문화센터 신축공사"></label>
+<label class="f">현재 설계단계 *<select id="zf_phase"><option value="">선택</option><option>기획설계</option><option>계획설계</option><option>중간설계</option><option>실시설계</option><option>시공단계</option></select></label>
+<label class="f">조달 구분 *<select id="zf_proc"><option value="">선택</option><option value="관급">관급 (발주처·조달청 구매)</option><option value="사급">사급 (시공사 구매)</option><option value="미정">미정 · 모름</option></select></label>
+<label class="f">천장 설치 착공(예정)일 <small>(선택)</small><input type="date" id="zf_start"></label>
+<div class="f full filebox"><b>도면(CAD) 파일 첨부 <small>(선택 · 실내재료마감표, 천장도, 평면도, 단면도)</small></b>
+<input type="file" id="zf_files" multiple>
+<ul id="zf_flist"></ul>
+<small class="fh">dwg · dxf · pdf · zip 등, 합계 <b>10MB 이하</b>. 휴대폰·태블릿에서도 「파일 / 내 파일 / 드라이브」에서 선택해 첨부할 수 있습니다. 용량이 크면 zenfix1@naver.com 으로 보내 주세요. 첨부 파일은 젠픽스 메일로만 전달됩니다.</small></div>
+<label class="f full">문의·요청 사항 <small>(선택)</small><textarea id="zf_memo" placeholder="예) 로비·복도 불연 적용 검토 요청, 샘플 요청 등"></textarea></label>
+<input class="hp" type="text" id="zf_hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+</div>
+<label class="agree"><input type="checkbox" id="zf_agree"><span><b>[필수] 개인정보 수집·이용에 동의합니다.</b> 입력한 정보는 설계 반영 문의 응대와 자료 회신 목적으로만 사용됩니다. 동의하지 않으셔도 이 자료는 이용하실 수 있으나, 젠픽스로 보내기와 회신은 어렵습니다.</span></label>
+<details><summary>개인정보 수집·이용 안내 (자세히 보기)</summary>
+<table><tbody>
+<tr><th>수집·이용 목적</th><td>설계 반영 문의 응대, 공간별 적용 가능 여부·추천·견적 회신, 자료 제공 현황 관리</td></tr>
+<tr><th>수집 항목</th><td>[입력] 지역, 회사명, 성함, 직책, 연락처, 이메일, 현장명, 설계단계, 조달구분(관급·사급), 천장 착공(예정)일, 첨부한 도면 파일, 문의 사항<br>[자동 기록] 접속 일시, 링크 구분코드, 이용 시간</td></tr>
+<tr><th>보유·이용 기간</th><td>수집일로부터 1년간 보관 후 지체 없이 파기합니다(문의 응대·회신 목적 달성 시 먼저 파기 가능). 동의 철회나 삭제를 요청하시면 지체 없이 파기합니다.</td></tr>
+<tr><th>동의 거부 권리</th><td>동의를 거부할 권리가 있으며, 거부하셔도 자료 열람·다운로드는 가능합니다. 다만 「젠픽스에 보내기」를 통한 접수와 회신은 제공되지 않습니다.</td></tr>
+<tr><th>처리 위탁·저장</th><td>접수 내용은 (주)젠픽스가 운영하는 구글 계정(구글 시트·Gmail)에 저장되며, 별도 제3자에게 제공하지 않습니다.</td></tr>
+<tr><th>문의·삭제 요청</th><td>(주)젠픽스 운영관리팀 최재언 팀장 · 010-9878-0487 · zenfix1@naver.com</td></tr>
+</tbody></table></details>
+<div class="go"><button type="button" id="zfgo" onclick="zfSubmit()">젠픽스에 보내기</button><span>도면(DWG·PDF)과 현장 정보만 남겨 주시면 됩니다.</span></div>
+<div id="zfmsg" role="status"></div>
+</form>
+<div class="foot">큰 도면은 zenfix1@naver.com 으로 보내 주세요. · (주)젠픽스 운영관리팀 최재언 팀장 · 010-9878-0487</div>
+</div>
+<div id="toast"></div>
+<script>function toast(m){var t=document.getElementById('toast');t.textContent=m;t.className='on';clearTimeout(window._t);window._t=setTimeout(function(){t.className=''},2400)}</script>
+<script>(function(){
+/* ▼▼ 구글 앱스크립트 웹앱 URL을 아래 따옴표 안에 붙여넣으세요 (비어 있으면 '메일 보내기'로 동작) ▼▼ */
+var ZF_ENDPOINT='https://script.google.com/macros/s/AKfycbxoJS2nduo6j1Q6svm7kpCA0XRn3M2OpPIDu6VoJzhCVAVp8jO2dpHseRIqG320zE96/exec';
+var ZF_TO='zenfix1@naver.com';
+var ZF_NOTICE_VER='2026-11-12';
+function $(i){return document.getElementById(i)}
+function qp(n){try{return new URLSearchParams(location.search).get(n)||''}catch(e){return ''}}
+var code=((window.ZF_CODE||qp('o')||'')+'').replace(/[^0-9A-Za-z가-힣_\-]/g,'').slice(0,40)||'(코드없음)';
+var sid='';try{sid=sessionStorage.getItem('zfsid')||'';if(!sid){sid=Math.random().toString(36).slice(2,10);sessionStorage.setItem('zfsid',sid)}}catch(e){sid=Math.random().toString(36).slice(2,10)}
+var t0=Date.now(),cnt={copy:0,dl:0,search:0,sim:0,pdf:0},maxS=0,dls=[];
+function base(ev,d){var p={ev:ev,o:code,sid:sid,t:new Date().toISOString(),pg:(location.pathname.split('/').pop()||'').slice(0,60),ua:(navigator.userAgent||'').slice(0,140),w:window.innerWidth,v:ZF_NOTICE_VER};for(var k in d)p[k]=d[k];return p}
+function fire(ev,d,beacon){if(!ZF_ENDPOINT)return false;var body=JSON.stringify(base(ev,d||{}));try{if(beacon&&navigator.sendBeacon){return navigator.sendBeacon(ZF_ENDPOINT,new Blob([body],{type:'text/plain;charset=UTF-8'}))}fetch(ZF_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:body,keepalive:true});return true}catch(e){return false}}
+/* 안내 배너 (추적이 켜진 경우에만) */
+if(ZF_ENDPOINT){var n=document.createElement('div');n.id='zfn';n.innerHTML='이 양식은 접수 현황 파악을 위해 <b>접속 일시 · 링크 구분코드</b>를 기록합니다. 이름·연락처 등은 아래 <b>「젠픽스에 보내기」</b>에서 동의하신 경우에만 수집합니다. <a onclick="var s=document.getElementById(\'send\');if(s)s.scrollIntoView({behavior:\'smooth\'});var d=document.querySelector(\'#zfform details\');if(d)d.open=true">자세히</a>';document.body.insertBefore(n,document.body.firstChild);fire('open',{ref:(document.referrer||'').slice(0,120)})}
+/* 이용 기록 후킹 */
+var _c=window.copy;if(_c)window.copy=function(){cnt.copy++;return _c.apply(this,arguments)};
+var _d=window.dlGo;if(_d)window.dlGo=function(f){cnt.dl++;if(dls.indexOf(f)<0)dls.push(f);return _d.apply(this,arguments)};
+var _p=window.savePdf;if(_p)window.savePdf=function(){cnt.pdf++;var pj=($('zf_proj')&&$('zf_proj').value)||hero(0);fire('pdf',{proj:pj,office:hero(1)});return _p.apply(this,arguments)};
+function hero(i){var e=document.querySelectorAll('.meta [contenteditable]')[i];var v=e?e.textContent.trim():'';return v==='(입력)'?'':v}
+var qs=$('qs'),qt;if(qs)qs.addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(function(){if(qs.value.trim().length>=3)cnt.search++},900)});
+document.addEventListener('change',function(e){if(e.target&&e.target.type==='file')cnt.sim++},true);
+window.addEventListener('scroll',function(){var h=document.documentElement.scrollHeight;if(h)maxS=Math.max(maxS,Math.round((window.scrollY+window.innerHeight)/h*100))},{passive:true});
+function sendAct(){var secs=Math.round((Date.now()-t0)/1000);var any=cnt.copy+cnt.dl+cnt.search+cnt.sim+cnt.pdf;if(!ZF_ENDPOINT||(any===0&&secs<8))return;fire('act',{secs:secs,copy:cnt.copy,dl:cnt.dl,dlf:dls.join(' | ').slice(0,300),search:cnt.search,sim:cnt.sim,pdf:cnt.pdf,scroll:Math.min(maxS,100)},true);cnt={copy:0,dl:0,search:0,sim:0,pdf:0};dls=[];t0=Date.now()}
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')sendAct()});
+window.addEventListener('pagehide',sendAct);
+/* 회신 양식 표 입력 가능하게 */
+var ft=document.querySelector('table.form tbody');
+if(ft){[].forEach.call(ft.querySelectorAll('tr:not(.ex)'),function(tr,ri){[].forEach.call(tr.children,function(td,ci){if([1,2,3,7].indexOf(ci)>-1&&!(td.parentNode.lastElementChild===td&&false)){td.setAttribute('contenteditable','true');td.setAttribute('inputmode',ci===2||ci===3?'decimal':'text')}})});
+ft.addEventListener('click',function(e){var s=e.target.closest&&e.target.closest('.cb');if(!s||s.closest('tr.ex'))return;var t=s.textContent;s.textContent=t.indexOf('☐')===0?t.replace('☐','☑'):t.replace('☑','☐')})}
+function rows(){var out=[],tot=0,P={},G={},F={},n=0;if(!ft)return out;
+ function pk(c){return [].filter.call(c.querySelectorAll('.cb'),function(x){return x.textContent.indexOf('☑')===0}).map(function(x){return x.textContent.replace('☑','').trim()})}
+ [].forEach.call(ft.querySelectorAll('tr:not(.ex)'),function(tr){var c=tr.children;if(c.length<8||/합계/.test(c[0].textContent))return;
+  var sp=c[1].textContent.trim(),h=c[2].textContent.trim(),a=c[3].textContent.trim(),nt=c[7].textContent.trim(),pr=pk(c[4]),gr=pk(c[5]),fr=pk(c[6]);
+  if(!(sp||h||a||nt||pr.length||gr.length||fr.length))return;
+  var av=parseFloat(a.replace(/,/g,''));n++;if(!isNaN(av)){tot+=av;pr.forEach(function(k){P[k]=(P[k]||0)+av});gr.forEach(function(k){G[k]=(G[k]||0)+av});fr.forEach(function(k){F[k]=(F[k]||0)+av})}
+  out.push(n+') '+(sp||'(공간명 없음)')+' | 천장고 '+(h?h+'mm':'-')+' | 면적 '+(a?a+'㎡':'-')+' | 제품 '+(pr.join('+')||'-')+' | 등급 '+(gr.join('+')||'-')+' | 경량틀 '+(fr.join('+')||'-')+(nt?' | 비고 '+nt:''))});
+ function sm(o){return Object.keys(o).map(function(k){return k+' '+(Math.round(o[k]*10)/10)+'㎡'}).join(', ')||'-'}
+ if(out.length)out.unshift('[요약] 공간 '+n+'개 · 총 '+(Math.round(tot*10)/10)+'㎡ / 제품: '+sm(P)+' / 등급: '+sm(G)+' / 경량틀: '+sm(F));
+ return out}
+/* 첨부 */
+var FILES=[],MAXB=10*1024*1024,OKEXT=/\.(dwg|dxf|pdf|zip|hwp|hwpx|xlsx|xls|jpg|jpeg|png)$/i;
+function fsz(n){return n>1048576?(n/1048576).toFixed(1)+'MB':Math.max(1,Math.round(n/1024))+'KB'}
+function fdraw(){var u=$('zf_flist');if(!u)return;u.innerHTML='';var t=0;FILES.forEach(function(f,i){t+=f.size;var li=document.createElement('li');li.appendChild(document.createTextNode(f.name+' ('+fsz(f.size)+')'));var b=document.createElement('button');b.type='button';b.textContent='삭제';b.onclick=function(){FILES.splice(i,1);fdraw()};li.appendChild(b);u.appendChild(li)});if(FILES.length){var s=document.createElement('li');s.style.fontWeight='700';s.textContent='합계 '+fsz(t)+' / 10MB';u.appendChild(s)}}
+if($('zf_files'))$('zf_files').addEventListener('change',function(e){var bad=[];[].forEach.call(e.target.files,function(f){if(!OKEXT.test(f.name)){bad.push(f.name+' (형식 제외)');return}if(FILES.some(function(x){return x.name===f.name&&x.size===f.size}))return;var t=FILES.reduce(function(a,x){return a+x.size},0);if(t+f.size>MAXB){bad.push(f.name+' (10MB 초과)');return}FILES.push(f)});e.target.value='';fdraw();if(bad.length)msg('첨부하지 못한 파일: '+bad.join(', ')+' — 메일(zenfix1@naver.com)로 보내 주세요.','er')});
+function readB64(f){return new Promise(function(res,rej){var r=new FileReader();r.onload=function(){var s=String(r.result);res({n:f.name,t:f.type||'application/octet-stream',d:s.slice(s.indexOf(',')+1)})};r.onerror=rej;r.readAsDataURL(f)})}
+/* 제출 */
+function msg(t,c){var m=$('zfmsg');m.textContent=t;m.className=c||''}
+window.zfSubmit=function(){
+ if($('zf_hp').value)return;
+ var f={region:$('zf_region').value,office:$('zf_office').value.trim(),name:$('zf_name').value.trim(),pos:$('zf_pos').value.trim(),tel:$('zf_tel').value.trim(),mail:$('zf_mail').value.trim(),proj:$('zf_proj').value.trim()||hero(0),memo:$('zf_memo').value.trim(),phase:$('zf_phase').value,proc:$('zf_proc').value,start:$('zf_start').value};
+ if(!f.office&&hero(1))f.office=hero(1);
+ if(!f.region){msg('지역을 선택해 주세요.','er');return}
+ if(!f.proj){msg('현장명을 입력해 주세요.','er');return}
+ if(!f.phase){msg('현재 설계단계를 선택해 주세요.','er');return}
+ if(!f.proc){msg('조달 구분(관급·사급)을 선택해 주세요.','er');return}
+ if(!f.office||!f.name){msg('회사명과 성함을 입력해 주세요.','er');return}
+ if(!f.tel){msg('연락처를 입력해 주세요.','er');return}
+ if(f.mail&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.mail)){msg('이메일 형식을 확인해 주세요.','er');return}
+ if(!$('zf_agree').checked){msg('개인정보 수집·이용에 동의해 주세요.','er');return}
+ f.rows=rows().join('\n');f.agree='동의('+ZF_NOTICE_VER+')';
+ var btn=$('zfgo');
+ if(ZF_ENDPOINT){btn.disabled=true;msg('전송 중입니다…','');
+  Promise.all(FILES.map(readB64)).then(function(fl){f.files=fl;f.fnames=FILES.map(function(x){return x.name}).join(', ');if(fl.length)msg('도면 파일 전송 중입니다… (용량에 따라 1분 이상 걸릴 수 있습니다. 창을 닫지 마세요)','');return fetch(ZF_ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(base('submit',f))})}).then(function(r){return r.json()}).then(function(j){btn.disabled=false;if(j&&j.ok){code=((f.region+'-'+f.office).replace(/[^0-9A-Za-z가-힣_\-]/g,'')).slice(0,40)||code;msg('✔ 젠픽스에 전달되었습니다'+(FILES.length?' (도면 '+FILES.length+'개 첨부)':'')+'. 확인 후 입력하신 연락처로 회신드립니다.','ok');toast('전달 완료');FILES=[];fdraw()}else throw 0}).catch(function(){btn.disabled=false;msg('자동 전송이 확인되지 않아 메일 작성 창을 엽니다. 메일을 꼭 「보내기」 하시고'+(FILES.length?', 도면 파일은 메일에 직접 첨부해 주세요.':'.'),'er');mailto(f)})
+ }else{mailto(f);msg('메일 작성 창이 열립니다. 메일을 「보내기」 해야 젠픽스로 전달됩니다.','ok')}
+};
+function mailto(f){var b='[젠픽스 설계반영 자료 회신]\n지역: '+f.region+'\n현장명: '+f.proj+'\n회사명: '+f.office+'\n성함: '+f.name+'\n직책: '+f.pos+'\n연락처: '+f.tel+'\n이메일: '+f.mail+'\n설계단계: '+f.phase+'\n조달구분: '+f.proc+'\n천장 착공(예정)일: '+(f.start||'(미입력)')+'\n문의사항: '+f.memo+(f.fnames?'\n첨부 예정 도면: '+f.fnames:'')+'\n\n[적용 공간]\n'+(f.rows||'(미입력)')+'\n\n개인정보 수집·이용 동의: 동의('+ZF_NOTICE_VER+')\n링크 구분코드: '+code;location.href='mailto:'+ZF_TO+'?subject='+encodeURIComponent('[설계반영 회신] '+(f.proj||'프로젝트')+' - '+f.region+' '+f.office)+'&body='+encodeURIComponent(b)}
+window.zfGoSend=function(){var s=$('send');if(!s)return;if($('zf_proj')&&!$('zf_proj').value)$('zf_proj').value=hero(0);if($('zf_office')&&!$('zf_office').value)$('zf_office').value=hero(1);s.scrollIntoView({behavior:'smooth'})};
+})()</script></body></html>
